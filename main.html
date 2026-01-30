@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi Kehadiran Jemaat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f8fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            color: #2c5aa0;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eaeaea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input[type="text"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="tel"]:focus {
+            border-color: #3a7bd5;
+            outline: none;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 25px;
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-option input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .radio-option label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        
+        .preview-section {
+            background-color: #f9fbfd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 10px;
+            border: 1px dashed #c8d6e5;
+        }
+        
+        .preview-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .preview-title h3 {
+            color: #2c5aa0;
+            font-size: 1.2rem;
+        }
+        
+        .preview-content {
+            background-color: #fff;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e1e8ed;
+            white-space: pre-line;
+            font-family: monospace;
+            line-height: 1.8;
+            min-height: 150px;
+            overflow-wrap: break-word;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .preview-btn {
+            background-color: #f1f8ff;
+            color: #2c5aa0;
+            border: 2px solid #2c5aa0;
+        }
+        
+        .preview-btn:hover {
+            background-color: #e6f0ff;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
+            color: white;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 123, 213, 0.3);
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .contact-info strong {
+            color: #2c5aa0;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            padding: 15px;
+        }
+        
+        .input-hint {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                min-width: 100%;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-church"></i> Absensi Kehadiran Jemaat</h1>
+            <p>Formulir kehadiran ibadah mingguan - data akan dikirim ke WhatsApp Kontak Centre</p>
+        </header>
+        
+        <div class="content">
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-user-edit"></i> Data Jemaat</h2>
+                
+                <div class="form-group">
+                    <label for="nama" class="required">Nama Jemaat</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+                    <div class="error-message" id="error-nama">Nama jemaat wajib diisi</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="kontak" class="required">Nomor Kontak Jemaat</label>
+                    <input type="tel" id="kontak" placeholder="Contoh: 081234567890 atau 6281234567890">
+                    <div class="input-hint">Nomor akan dinormalisasi ke format 62xxxxxxxxxxx</div>
+                    <div class="error-message" id="error-kontak">Nomor kontak wajib diisi dan harus valid</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Status Jemaat</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="jemaat-baru-y" name="jemaat-baru" value="Ya">
+                            <label for="jemaat-baru-y">Jemaat Baru</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="jemaat-baru-t" name="jemaat-baru" value="Tidak">
+                            <label for="jemaat-baru-t">Jemaat Lama</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="error-jemaat">Pilih status jemaat</div>
+                </div>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-title">
+                    <h3><i class="fas fa-eye"></i> Preview Pesan WhatsApp</h3>
+                    <span id="preview-status">Belum ada data</span>
+                </div>
+                <div class="preview-content" id="preview-content">
+                    Data akan ditampilkan di sini setelah Anda mengisi formulir
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" class="preview-btn" id="preview-btn">
+                    <i class="fas fa-sync-alt"></i> Perbarui Preview
+                </button>
+                <button type="button" class="submit-btn" id="submit-btn">
+                    <i class="fab fa-whatsapp"></i> Kirim Absensi ke WhatsApp
+                </button>
+            </div>
+            
+            <div class="contact-info">
+                <p>Data akan dikirim ke: <strong>Kontak Centre Gereja (6285245155777)</strong></p>
+                <p>Pastikan nomor WhatsApp Anda aktif untuk konfirmasi penerimaan data</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Sistem Absensi Jemaat | Hanya menggunakan HTML, CSS, dan JavaScript</p>
+        </footer>
+    </div>
+
+    <script>
+        // Nomor WA kontak centre yang hardcoded
+        const WA_CENTRE_NUMBER = "6285245155777";
+        
+        // Elemen DOM
+        const namaInput = document.getElementById('nama');
+        const kontakInput = document.getElementById('kontak');
+        const jemaatBaruInputs = document.querySelectorAll('input[name="jemaat-baru"]');
+        const previewContent = document.getElementById('preview-content');
+        const previewStatus = document.getElementById('preview-status');
+        const previewBtn = document.getElementById('preview-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        // Fungsi untuk menampilkan error
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(`error-${fieldId}`);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            // Tambahkan border merah pada input
+            const inputElement = document.getElementById(fieldId);
+            inputElement.style.borderColor = '#e74c3c';
+            
+            return false;
+        }
+        
+        // Fungsi untuk menghapus error
+        function clearError(fieldId) {
+            const errorElement = document.getElementById(`error-${fieldId}`);
+            errorElement.style.display = 'none';
+            
+            // Kembalikan border normal
+            const inputElement = document.getElementById(fieldId);
+            inputElement.style.borderColor = '#e1e8ed';
+            
+            return true;
+        }
+        
+        // Fungsi normalisasi nomor (0 → 62)
+        function normalizePhoneNumber(phone) {
+            // Hapus semua karakter non-digit
+            let normalized = phone.replace(/\D/g, '');
+            
+            // Jika diawali dengan 0, ganti dengan 62
+            if (normalized.startsWith('0')) {
+                normalized = '62' + normalized.substring(1);
+            }
+            
+            // Jika sudah diawali dengan 62, biarkan
+            // Pastikan panjangnya minimal 10 digit
+            if (normalized.length < 10) {
+                return null;
+            }
+            
+            return normalized;
+        }
+        
+        // Fungsi untuk mendapatkan nilai status jemaat
+        function getJemaatStatus() {
+            for (const input of jemaatBaruInputs) {
+                if (input.checked) {
+                    return input.value;
+                }
+            }
+            return null;
+        }
+        
+        // Fungsi untuk validasi form
+        function validateForm() {
+            let isValid = true;
+            
+            // Validasi nama
+            if (!namaInput.value.trim()) {
+                showError('nama', 'Nama jemaat wajib diisi');
+                isValid = false;
+            } else {
+                clearError('nama');
+            }
+            
+            // Validasi kontak
+            const phone = kontakInput.value.trim();
+            if (!phone) {
+                showError('kontak', 'Nomor kontak wajib diisi');
+                isValid = false;
+            } else {
+                const normalizedPhone = normalizePhoneNumber(phone);
+                if (!normalizedPhone) {
+                    showError('kontak', 'Nomor kontak tidak valid');
+                    isValid = false;
+                } else {
+                    clearError('kontak');
+                }
+            }
+            
+            // Validasi status jemaat
+            const jemaatStatus = getJemaatStatus();
+            if (!jemaatStatus) {
+                showError('jemaat', 'Pilih status jemaat');
+                isValid = false;
+            } else {
+                clearError('jemaat');
+            }
+            
+            return isValid;
+        }
+        
+        // Fungsi untuk membuat timestamp saat klik tombol kirim
+        function getCurrentTimestamp() {
+            const now = new Date();
+            
+            // Format: YYYY-MM-DD HH:mm:ss
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+        
+        // Fungsi untuk membuat pesan preview (tanpa timestamp)
+        function createPreviewMessage() {
+            const nama = namaInput.value.trim();
+            const kontak = kontakInput.value.trim();
+            const jemaatStatus = getJemaatStatus();
+            
+            if (!nama || !kontak || !jemaatStatus) {
+                previewStatus.textContent = "Isi semua data untuk melihat preview";
+                previewStatus.style.color = "#e67e22";
+                return "Data akan ditampilkan di sini setelah Anda mengisi formulir";
+            }
+            
+            const normalizedPhone = normalizePhoneNumber(kontak);
+            
+            let message = `ABSENSI JEMAAT\n\n`;
+            message += `Nama: ${nama}\n`;
+            message += `Kontak: ${normalizedPhone}\n`;
+            message += `Jemaat Baru: ${jemaatStatus}\n`;
+            message += `Waktu absen: [Timestamp akan ditambahkan saat pengiriman]`;
+            
+            previewStatus.textContent = "Preview aktif";
+            previewStatus.style.color = "#27ae60";
+            
+            return message;
+        }
+        
+        // Fungsi untuk membuat pesan lengkap dengan timestamp
+        function createFullMessage() {
+            const nama = namaInput.value.trim();
+            const kontak = kontakInput.value.trim();
+            const jemaatStatus = getJemaatStatus();
+            const normalizedPhone = normalizePhoneNumber(kontak);
+            
+            // Pembuatan timestamp saat klik tombol kirim
+            const timestamp = getCurrentTimestamp();
+            
+            let message = `ABSENSI JEMAAT\n\n`;
+            message += `Nama: ${nama}\n`;
+            message += `Kontak: ${normalizedPhone}\n`;
+            message += `Jemaat Baru: ${jemaatStatus}\n`;
+            message += `Waktu absen: ${timestamp}`;
+            
+            return message;
+        }
+        
+        // Fungsi untuk memperbarui preview
+        function updatePreview() {
+            if (validateForm()) {
+                const previewMessage = createPreviewMessage();
+                previewContent.textContent = previewMessage;
+            } else {
+                previewContent.textContent = "Perbaiki error pada form untuk melihat preview";
+                previewStatus.textContent = "Ada error pada form";
+                previewStatus.style.color = "#e74c3c";
+            }
+        }
+        
+        // Fungsi untuk mengirim data ke WhatsApp
+        function sendToWhatsApp() {
+            if (!validateForm()) {
+                return;
+            }
+            
+            // Buat pesan lengkap dengan timestamp
+            const fullMessage = createFullMessage();
+            
+            // Encode pesan untuk URL
+            const encodedMessage = encodeURIComponent(fullMessage);
+            
+            // Pembuatan URL wa.me dan encodeURIComponent
+            const waURL = `https://wa.me/${WA_CENTRE_NUMBER}?text=${encodedMessage}`;
+            
+            // Buka WhatsApp di tab baru
+            window.open(waURL, '_blank');
+            
+            // Tampilkan konfirmasi
+            alert("Aplikasi WhatsApp akan terbuka dengan pesan absensi. Pastikan untuk mengirim pesan tersebut ke Kontak Centre.");
+        }
+        
+        // Event Listeners
+        previewBtn.addEventListener('click', updatePreview);
+        
+        submitBtn.addEventListener('click', sendToWhatsApp);
+        
+        // Update preview saat input berubah
+        namaInput.addEventListener('input', function() {
+            clearError('nama');
+            updatePreview();
+        });
+        
+        kontakInput.addEventListener('input', function() {
+            clearError('kontak');
+            updatePreview();
+        });
+        
+        jemaatBaruInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                clearError('jemaat');
+                updatePreview();
+            });
+        });
+        
+        // Inisialisasi preview awal
+        updatePreview();
+    </script>
+</body>
+</html>
