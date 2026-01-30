@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Absensi Kehadiran Jemaat</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,75 +13,68 @@
         }
         
         body {
-            background-color: #f5f8fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            color: #e0e0e0;
             min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
-            color: white;
-            padding: 25px 20px;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
         }
         
-        header p {
-            font-size: 1rem;
-            opacity: 0.9;
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(25, 25, 40, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 30px 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #3498db;
+            filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.3));
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            color: #bdc3c7;
+            font-size: 0.95rem;
+            opacity: 0.8;
         }
         
         .content {
-            padding: 25px;
-        }
-        
-        .form-section {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 1.3rem;
-            color: #2c5aa0;
-            margin-bottom: 18px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eaeaea;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title i {
-            font-size: 1.2rem;
+            padding: 30px;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #444;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
         
         .required::after {
@@ -93,17 +85,21 @@
         input[type="text"],
         input[type="tel"] {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #e1e8ed;
-            border-radius: 8px;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
         
         input[type="text"]:focus,
         input[type="tel"]:focus {
-            border-color: #3a7bd5;
             outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            background: rgba(255, 255, 255, 0.08);
         }
         
         .radio-group {
@@ -115,137 +111,149 @@
         .radio-option {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            cursor: pointer;
         }
         
         .radio-option input {
-            width: 18px;
-            height: 18px;
+            display: none;
+        }
+        
+        .radio-custom {
+            width: 22px;
+            height: 22px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-custom::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+        
+        .radio-option input:checked + .radio-custom {
+            border-color: #3498db;
+        }
+        
+        .radio-option input:checked + .radio-custom::after {
+            opacity: 1;
+            transform: scale(1);
         }
         
         .radio-option label {
             margin-bottom: 0;
             font-weight: normal;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
         
-        .preview-section {
-            background-color: #f9fbfd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 10px;
-            border: 1px dashed #c8d6e5;
+        .radio-option:hover label {
+            color: #3498db;
         }
         
-        .preview-title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
+        .radio-option:hover .radio-custom {
+            border-color: rgba(52, 152, 219, 0.5);
         }
         
-        .preview-title h3 {
-            color: #2c5aa0;
-            font-size: 1.2rem;
-        }
-        
-        .preview-content {
-            background-color: #fff;
-            padding: 18px;
-            border-radius: 6px;
-            border: 1px solid #e1e8ed;
-            white-space: pre-line;
-            font-family: monospace;
-            line-height: 1.8;
-            min-height: 150px;
-            overflow-wrap: break-word;
+        .input-hint {
+            font-size: 0.85rem;
+            color: #95a5a6;
+            margin-top: 8px;
+            margin-left: 2px;
         }
         
         .error-message {
             color: #e74c3c;
             font-size: 0.9rem;
-            margin-top: 5px;
+            margin-top: 8px;
+            margin-left: 2px;
             display: none;
         }
         
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        button {
-            padding: 16px 24px;
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
+            letter-spacing: 1px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .preview-btn {
-            background-color: #f1f8ff;
-            color: #2c5aa0;
-            border: 2px solid #2c5aa0;
-        }
-        
-        .preview-btn:hover {
-            background-color: #e6f0ff;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
-            color: white;
+            gap: 12px;
         }
         
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(58, 123, 213, 0.3);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #3ca0e3 0%, #2c8bc9 100%);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn i {
+            font-size: 1.2rem;
         }
         
         .contact-info {
             margin-top: 30px;
-            padding: 15px;
-            background-color: #f0f7ff;
-            border-radius: 8px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
             text-align: center;
-            font-size: 0.95rem;
-            color: #555;
+            font-size: 0.9rem;
+            color: #95a5a6;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .contact-info strong {
-            color: #2c5aa0;
+            color: #3498db;
+            font-weight: 600;
         }
         
         footer {
             margin-top: 30px;
             text-align: center;
-            color: #777;
-            font-size: 0.9rem;
-            padding: 15px;
-        }
-        
-        .input-hint {
+            color: #7f8c8d;
             font-size: 0.85rem;
-            color: #666;
-            margin-top: 5px;
-            font-style: italic;
+            padding: 20px 0 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
             .container {
-                border-radius: 10px;
+                max-width: 100%;
+                border-radius: 16px;
+            }
+            
+            header {
+                padding: 25px 20px;
             }
             
             .content {
-                padding: 20px;
+                padding: 25px;
             }
             
             .radio-group {
@@ -253,12 +261,12 @@
                 gap: 15px;
             }
             
-            button {
-                min-width: 100%;
+            h1 {
+                font-size: 1.6rem;
             }
             
-            header h1 {
-                font-size: 1.5rem;
+            .logo {
+                font-size: 2.5rem;
             }
         }
         
@@ -268,77 +276,84 @@
             }
             
             .content {
-                padding: 15px;
+                padding: 20px;
             }
             
-            .section-title {
-                font-size: 1.1rem;
+            header {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
             }
         }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group, .submit-btn, .contact-info {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .submit-btn { animation-delay: 0.4s; }
+        .contact-info { animation-delay: 0.5s; }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-church"></i> Absensi Kehadiran Jemaat</h1>
-            <p>Formulir kehadiran ibadah mingguan - data akan dikirim ke WhatsApp Kontak Centre</p>
+            <div class="logo">
+                <i class="fas fa-church"></i>
+            </div>
+            <h1>ABSENSI JEMAAT</h1>
+            <p class="subtitle">Formulir kehadiran ibadah mingguan</p>
         </header>
         
         <div class="content">
-            <div class="form-section">
-                <h2 class="section-title"><i class="fas fa-user-edit"></i> Data Jemaat</h2>
-                
-                <div class="form-group">
-                    <label for="nama" class="required">Nama Jemaat</label>
-                    <input type="text" id="nama" placeholder="Masukkan nama lengkap">
-                    <div class="error-message" id="error-nama">Nama jemaat wajib diisi</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="kontak" class="required">Nomor Kontak Jemaat</label>
-                    <input type="tel" id="kontak" placeholder="Contoh: 081234567890 atau 6281234567890">
-                    <div class="input-hint">Nomor akan dinormalisasi ke format 62xxxxxxxxxxx</div>
-                    <div class="error-message" id="error-kontak">Nomor kontak wajib diisi dan harus valid</div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="required">Status Jemaat</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="jemaat-baru-y" name="jemaat-baru" value="Ya">
-                            <label for="jemaat-baru-y">Jemaat Baru</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="jemaat-baru-t" name="jemaat-baru" value="Tidak">
-                            <label for="jemaat-baru-t">Jemaat Lama</label>
-                        </div>
+            <div class="form-group">
+                <label for="nama" class="required">Nama Jemaat</label>
+                <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+                <div class="error-message" id="error-nama">Nama jemaat wajib diisi</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="kontak" class="required">Nomor Kontak Jemaat</label>
+                <input type="tel" id="kontak" placeholder="Contoh: 081234567890 atau 6281234567890">
+                <div class="input-hint">Nomor akan dinormalisasi ke format 62xxxxxxxxxxx</div>
+                <div class="error-message" id="error-kontak">Nomor kontak wajib diisi dan harus valid</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="required">Status Jemaat</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="jemaat-baru-y" name="jemaat-baru" value="Ya">
+                        <div class="radio-custom"></div>
+                        <label for="jemaat-baru-y">Jemaat Baru</label>
                     </div>
-                    <div class="error-message" id="error-jemaat">Pilih status jemaat</div>
+                    <div class="radio-option">
+                        <input type="radio" id="jemaat-baru-t" name="jemaat-baru" value="Tidak">
+                        <div class="radio-custom"></div>
+                        <label for="jemaat-baru-t">Jemaat Lama</label>
+                    </div>
                 </div>
+                <div class="error-message" id="error-jemaat">Pilih status jemaat</div>
             </div>
             
-            <div class="preview-section">
-                <div class="preview-title">
-                    <h3><i class="fas fa-eye"></i> Preview Pesan WhatsApp</h3>
-                    <span id="preview-status">Belum ada data</span>
-                </div>
-                <div class="preview-content" id="preview-content">
-                    Data akan ditampilkan di sini setelah Anda mengisi formulir
-                </div>
-            </div>
-            
-            <div class="button-group">
-                <button type="button" class="preview-btn" id="preview-btn">
-                    <i class="fas fa-sync-alt"></i> Perbarui Preview
-                </button>
-                <button type="button" class="submit-btn" id="submit-btn">
-                    <i class="fab fa-whatsapp"></i> Kirim Absensi ke WhatsApp
-                </button>
-            </div>
+            <button class="submit-btn" id="submit-btn">
+                <i class="fab fa-whatsapp"></i> Kirim Absensi ke WhatsApp
+            </button>
             
             <div class="contact-info">
                 <p>Data akan dikirim ke: <strong>Kontak Centre Gereja (6285245155777)</strong></p>
-                <p>Pastikan nomor WhatsApp Anda aktif untuk konfirmasi penerimaan data</p>
+                <p>Pastikan WhatsApp Anda aktif untuk konfirmasi</p>
             </div>
         </div>
         
@@ -355,9 +370,6 @@
         const namaInput = document.getElementById('nama');
         const kontakInput = document.getElementById('kontak');
         const jemaatBaruInputs = document.querySelectorAll('input[name="jemaat-baru"]');
-        const previewContent = document.getElementById('preview-content');
-        const previewStatus = document.getElementById('preview-status');
-        const previewBtn = document.getElementById('preview-btn');
         const submitBtn = document.getElementById('submit-btn');
         
         // Fungsi untuk menampilkan error
@@ -368,7 +380,10 @@
             
             // Tambahkan border merah pada input
             const inputElement = document.getElementById(fieldId);
-            inputElement.style.borderColor = '#e74c3c';
+            if (inputElement) {
+                inputElement.style.borderColor = '#e74c3c';
+                inputElement.style.boxShadow = '0 0 0 2px rgba(231, 76, 60, 0.2)';
+            }
             
             return false;
         }
@@ -380,7 +395,10 @@
             
             // Kembalikan border normal
             const inputElement = document.getElementById(fieldId);
-            inputElement.style.borderColor = '#e1e8ed';
+            if (inputElement) {
+                inputElement.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                inputElement.style.boxShadow = 'none';
+            }
             
             return true;
         }
@@ -468,32 +486,6 @@
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
         
-        // Fungsi untuk membuat pesan preview (tanpa timestamp)
-        function createPreviewMessage() {
-            const nama = namaInput.value.trim();
-            const kontak = kontakInput.value.trim();
-            const jemaatStatus = getJemaatStatus();
-            
-            if (!nama || !kontak || !jemaatStatus) {
-                previewStatus.textContent = "Isi semua data untuk melihat preview";
-                previewStatus.style.color = "#e67e22";
-                return "Data akan ditampilkan di sini setelah Anda mengisi formulir";
-            }
-            
-            const normalizedPhone = normalizePhoneNumber(kontak);
-            
-            let message = `ABSENSI JEMAAT\n\n`;
-            message += `Nama: ${nama}\n`;
-            message += `Kontak: ${normalizedPhone}\n`;
-            message += `Jemaat Baru: ${jemaatStatus}\n`;
-            message += `Waktu absen: [Timestamp akan ditambahkan saat pengiriman]`;
-            
-            previewStatus.textContent = "Preview aktif";
-            previewStatus.style.color = "#27ae60";
-            
-            return message;
-        }
-        
         // Fungsi untuk membuat pesan lengkap dengan timestamp
         function createFullMessage() {
             const nama = namaInput.value.trim();
@@ -513,23 +505,16 @@
             return message;
         }
         
-        // Fungsi untuk memperbarui preview
-        function updatePreview() {
-            if (validateForm()) {
-                const previewMessage = createPreviewMessage();
-                previewContent.textContent = previewMessage;
-            } else {
-                previewContent.textContent = "Perbaiki error pada form untuk melihat preview";
-                previewStatus.textContent = "Ada error pada form";
-                previewStatus.style.color = "#e74c3c";
-            }
-        }
-        
         // Fungsi untuk mengirim data ke WhatsApp
         function sendToWhatsApp() {
             if (!validateForm()) {
                 return;
             }
+            
+            // Tambahkan animasi loading ke tombol
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            submitBtn.disabled = true;
             
             // Buat pesan lengkap dengan timestamp
             const fullMessage = createFullMessage();
@@ -540,38 +525,35 @@
             // Pembuatan URL wa.me dan encodeURIComponent
             const waURL = `https://wa.me/${WA_CENTRE_NUMBER}?text=${encodedMessage}`;
             
-            // Buka WhatsApp di tab baru
-            window.open(waURL, '_blank');
-            
-            // Tampilkan konfirmasi
-            alert("Aplikasi WhatsApp akan terbuka dengan pesan absensi. Pastikan untuk mengirim pesan tersebut ke Kontak Centre.");
+            // Buka WhatsApp di tab baru setelah jeda singkat
+            setTimeout(() => {
+                window.open(waURL, '_blank');
+                
+                // Kembalikan tombol ke keadaan semula
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1000);
+            }, 500);
         }
         
         // Event Listeners
-        previewBtn.addEventListener('click', updatePreview);
-        
         submitBtn.addEventListener('click', sendToWhatsApp);
         
-        // Update preview saat input berubah
-        namaInput.addEventListener('input', function() {
-            clearError('nama');
-            updatePreview();
-        });
-        
-        kontakInput.addEventListener('input', function() {
-            clearError('kontak');
-            updatePreview();
-        });
+        // Hapus error saat input berubah
+        namaInput.addEventListener('input', () => clearError('nama'));
+        kontakInput.addEventListener('input', () => clearError('kontak'));
         
         jemaatBaruInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                clearError('jemaat');
-                updatePreview();
-            });
+            input.addEventListener('change', () => clearError('jemaat'));
         });
         
-        // Inisialisasi preview awal
-        updatePreview();
+        // Submit form dengan Enter key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                sendToWhatsApp();
+            }
+        });
     </script>
 </body>
 </html>
